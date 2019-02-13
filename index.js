@@ -3,8 +3,8 @@ var socket = require('socket.io');
 
 // App setup
 var app = express();
-var server = app.listen(4000, function(){
-    console.log('listening for requests on port 4000,');
+var server = app.listen(5000, function(){
+    console.log('listening for requests on port 5000,');
 });
 
 // Static files
@@ -19,12 +19,12 @@ io.on('connection', (socket) => {
     // Handle chat event
     socket.on('chat', function(data){
         // console.log(data);
-        socket.sockets.emit('chat', data);
+        io.sockets.emit('chat', data);
     });
 
     // Handle typing event
     socket.on('typing', function(data){
-        io.broadcast.emit('typing', data);
+        socket.broadcast.emit('typing', data);
     });
 
 });
